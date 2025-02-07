@@ -7,6 +7,7 @@ Create a **Next.js** web application that:
 2. **Reformats** the CV into a consistent, user-friendly layout (with clear headings, bold text, etc.).
 3. Displays the **updated CV** in a **rich text editor**, allowing the user to make final adjustments.
 4. Incorporates a **required** agentic AI component—where you decide how an AI agent can further aid the CV process or potentially enhance the next step in the recruitment pipeline.
+5. **AI-Powered CV Editing**: After initial review, let users provide input to further refine and format the CV using AI-driven suggestions.
 
 We’ll provide:
 
@@ -37,8 +38,16 @@ We’ll provide:
    - Show the updated CV in a **rich text editor**, so the user can adjust or finalize it before completion.
 
 5. **Agentic AI**
+
    - Use a multi-step or “agent-like” approach in at least one aspect of this project—whether it’s during anonymization, reformatting, or another creative step in the recruitment pipeline.
    - We encourage you to **be inventive** about how an AI agent might assist or add value here.
+
+6. **AI-Powered CV Editing**
+
+   - **Interactive Enhancements**: After the initial review, offer an additional step where the user can input preferences or specific instructions (e.g., “emphasize leadership skills,” “modernize layout,” “adjust tone for a creative role”).
+   - **AI-Driven Suggestions**: Utilize AI to analyze the user’s input alongside the current CV content to suggest further formatting improvements, refined phrasing, or structural adjustments.
+   - **User-Controlled Integration**: Display AI suggestions in a preview panel and allow the user to accept, modify, or reject each suggestion before finalizing the CV.
+   - **Documentation**: Clearly document the prompts and assumptions used in generating AI suggestions so that the user understands how their input influences the final format.
 
 ---
 
@@ -64,13 +73,13 @@ We’ll provide:
 
 2. **Implementation**
 
-   - Complete the tasks (anonymization, reformatting, rich text editing) while integrating at least one **agentic AI** step.
+   - Complete the tasks (anonymization, reformatting, rich text editing, and AI-powered CV editing) while integrating at least one **agentic AI** step.
    - Document your approach in a readable file for review.
 
 3. **Deployment**
 
    - Deploy to **Vercel** and share the link.
-   - Ensure we can test the flow end to end (upload → anonymize → reformat → review → final).
+   - Ensure we can test the flow end to end (upload → anonymize → reformat → review → AI editing → final).
 
 4. **Testing & Documentation**
    - Provide a **quick start** guide for installing/running.
@@ -80,11 +89,11 @@ We’ll provide:
 
 ## 4. Evaluation Criteria
 
-1. **Functionality & Usability**: Does the CV anonymization and reformatting work? Is the editor intuitive?
-2. **Agentic AI**: Have you implemented a multi-step or agent-like process in at least one stage?
+1. **Functionality & Usability**: Does the CV anonymization and reformatting work? Is the editor intuitive? Are AI suggestions clearly presented and useful?
+2. **Agentic AI**: Have you implemented a multi-step or agent-like process in at least one stage, including the AI-powered editing?
 3. **Code Quality & Organization**: Is the code maintainable, readable, and structured well?
 4. **Testing & Documentation**: Do you have meaningful tests, and are setup/deployment instructions clear?
-5. **Styling & UX**: Are headings, bold text, and layout consistent with the modern design principles?
+5. **Styling & UX**: Are headings, bold text, and layout consistent with modern design principles?
 
 ---
 

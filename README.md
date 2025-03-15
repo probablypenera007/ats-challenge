@@ -1,115 +1,144 @@
-# AI-Powered Candidate Ranking System for Blue-Collar & Sales Roles
+# AI-Powered Dynamic Interview Assistant with Candidate Profiling & Scoring
 
 ## Objective
-Develop a Next.js web application that:
-- **Allows multiple CV uploads** (supporting formats like PDF, DOCX, and plain text).
-- **Parses each CV using AI APIs** (the user may choose which AI API to integrate) to extract key candidate information.
-- **Matches and ranks candidates** against a set of predefined, detailed job roles focused on blue-collar and sales positions.
-- **Provides a comprehensive match score and breakdown** for each candidate based on the intricate requirements of each role.
-- **Displays the project on Vercel** with integrated AI functions, without the need for a dedicated backend.
 
-## Provided Job Roles
-A set of five detailed job roles will be provided in a JSON file. These roles include all necessary details such as:
-- **Job Title and Company**
-- **Location (based in Australia)**
-- **Detailed Job Descriptions:**
-  - Responsibilities
-  - Technical and Practical Requirements
-  - Soft Skills and Behavioral Traits
-  - Experience and Education Requirements
-  - Additional Criteria (e.g., hourly rate, shift timings)
-
-*Example:* A role like "Sales Representative" at "Retail Solutions Australia" will include details such as required POS system knowledge, customer engagement skills, and flexible shift timings.
-
-## CV Generation for Testing
-**Important:** Candidates must generate their own sample CVs to simulate various testing scenarios. These CVs should cover a range of candidate profiles, including variations in:
-- **Skills:** Both technical (e.g., familiarity with retail software, machinery operation) and soft skills (e.g., customer service, teamwork).
-- **Work Experience:** Different levels of experience in blue-collar or sales roles.
-- **Educational Background:** Variations in formal education and certifications.
-
-Generating diverse CV samples will help demonstrate:
-- How well the AI parsing extracts key information.
-- The accuracy of the matching algorithm across different candidate profiles.
-- The robustness of the ranking system when handling multiple and varied CV inputs.
-
-## Core Features
-
-### 1. Multi-CV Upload and Parsing
-- **CV Upload Interface:**
-  - Supports drag-and-drop or file selection for uploading multiple CVs.
-  - Accepts PDF, DOCX, and plain text formats.
-- **Parsing Mechanism:**
-  - Utilizes AI APIs (e.g., OpenAI API or another chosen AI service) to extract key information such as:
-    - **Personal Details:** Name (or anonymized identifier).
-    - **Skills:** Relevant to blue-collar and sales roles.
-    - **Work Experience:** Job titles, companies, duration, and key responsibilities.
-    - **Education & Certifications:** Degrees and industry-relevant certifications.
-- **User Choice:** The application should allow the user to choose which AI API to integrate. The rationale behind this choice must be documented in the final project documentation.
-
-### 2. Predefined Detailed Job Roles
-- **Focus:** Blue-collar and sales roles.
-- **Job Role Details:** Each role includes:
-  - **Basic Identifiers:** Job title, company, and location.
-  - **Detailed Job Description:**
-    - **Responsibilities:** Clear explanation of daily tasks.
-    - **Technical & Practical Requirements:** Specific skills, tools, or operational knowledge.
-    - **Soft Skills:** Desired interpersonal and behavioral traits.
-    - **Experience & Educational Requirements:** Years of experience, education level, and certifications.
-    - **Additional Criteria:** Hourly rate, shift timings, and other relevant factors.
-
-### 3. Matching Process and Scoring
-- **Data Extraction & Comparison:**
-  - Compare candidate information extracted from the CVs with the detailed job role descriptions.
-- **Matching Criteria:**
-  - **Skills Overlap:** Matching candidate skills with job requirements.
-  - **Experience Alignment:** Evaluation of work experience and responsibilities.
-  - **Educational Fit:** Assessment of educational background and certifications.
-  - **Soft Skills Compatibility:** Analysis based on mentions of interpersonal skills.
-- **Scoring Algorithm:**
-  - **Weighted Factors Example:**
-    - 40% Skills Match
-    - 30% Experience & Responsibilities
-    - 20% Education & Certifications
-    - 10% Soft Skills
-  - **Output:** An overall match score (percentage or numerical value) with a detailed breakdown of contributing factors.
-
-### 4. Candidate Ranking and Display
-- **Dashboard Overview:**
-  - Displays a ranked list of candidates for each job role based on their match scores.
-- **Detailed Candidate View:**
-  - **Overview:** Shows candidate name (or anonymized ID), overall match score, and key matching highlights.
-  - **Breakdown:** Provides an in-depth explanation of how the candidate’s skills, experience, and education align with the role.
-
-## Technical Approach
-
-### Frontend & AI Integration
-- **Framework:** Next.js will be used to build the application, ensuring a fast, responsive UI.
-- **Hosting:** The project will be deployed on Vercel, leveraging its serverless functions if needed.
-- **AI Functions:** 
-  - All AI-powered parsing and matching functions will be integrated directly into the Next.js project.
-  - Developers can use client-side or serverless functions (API routes) to call the selected AI APIs.
-
-### Data Storage & Job Roles
-- **Job Roles:** Stored as a JSON file within the project, containing the predefined detailed job roles.
-- **CV Data:** Uploaded CVs will be processed directly in the application; no persistent backend storage is required.
-
-## Testing & Documentation
-- **Unit Tests:**
-  - Validate the accuracy of CV parsing functions.
-  - Test the matching algorithm for correct score calculations.
-  - Verify the functionality of key UI components (upload interface, dashboard, detailed views).
-- **Documentation:**
-  - Provide a comprehensive README with setup instructions and environment configurations (including API keys).
-  - **Final Document:** Include a detailed explanation of the chosen AI API/library, along with the overall design rationale and any considerations for future enhancements.
-
-## Final Workflow
-1. **Upload:** Recruiters upload multiple CVs through the web interface.
-2. **Parsing:** AI functions process each CV using the selected AI API to extract candidate data.
-3. **Job Matching:** The system compares the extracted candidate data against the provided detailed job roles.
-4. **Scoring:** Each candidate receives a match score with a detailed breakdown of strengths and weaknesses.
-5. **Display:** Candidates are ranked on a dashboard with detailed views for each candidate.
-6. **Final Documentation:** A final document must explain the chosen AI API/library and justify all design decisions.
+Develop a **Next.js** web application that enables recruiters to upload both a job description and a candidate’s CV. The system will then generate personalized interview questions using an AI API, conduct a one-shot, dynamic multi-turn interview via a chat interface, and finally produce a performance evaluation that includes scoring based on answer quality and the time taken to respond.
 
 ---
 
-*Note: While the job roles are provided as dummy data (see the accompanying JSON file), candidates must create and test with their own CV samples to fully demonstrate the functionality and robustness of the matching system.*
+## Core Tasks
+
+### 1. Dual Data Input
+
+#### A. Job Description Input
+- **Input Form**:  
+  - Create a responsive form where recruiters can enter or select a detailed job description.
+  - Validate input to ensure sufficient detail (e.g., minimum character count).
+
+#### B. Candidate CV Upload
+- **CV Upload Interface**:  
+  - Allow users to upload a candidate’s CV (supporting PDF, DOCX, or plain text).
+  - Optionally, perform basic parsing or use the AI API to extract key candidate details.
+
+---
+
+### 2. AI-Driven Question Generation
+
+- **Data Fusion for Question Generation**:  
+  - Use an AI API (e.g., OpenAI) to process both the job description and the candidate’s CV.
+  - **Prompt Design**: Craft prompts to ensure the AI considers both data sources to generate a tailored set of interview questions.
+  - **Output**: Generate a set of questions that are contextually relevant to the role and the candidate’s background, optionally categorizing them (e.g., technical, behavioral, situational).
+
+---
+
+### 3. One-Shot Dynamic Interview Chat Interface
+
+- **Chat Window Setup**:  
+  - Develop a streamlined chat interface where the candidate answers the AI-generated questions in a continuous, uninterrupted session.
+  - Clearly display the AI interviewer’s questions and capture candidate responses in real time.
+
+- **Multi-Turn, Context-Aware Conversation**:  
+  - **Continuous Flow**: The conversation proceeds in one shot without options to pause, review, or restart.
+  - **Adaptive Follow-Up**: The AI interviewer should ask follow-up questions or request clarifications based on the candidate’s answers.
+  - **Timing Metrics**: Automatically record the time taken by the candidate to answer each question. This data should be collected seamlessly as part of the interview flow.
+
+---
+
+### 4. Interview Scoring & Analysis
+
+- **Scoring Trigger**:  
+  - Once the interview concludes, automatically trigger the scoring process based on the entire transcript and timing metrics.
+
+- **AI-Powered Analysis**:  
+  - Use the complete conversation transcript, the original job description, the candidate’s CV, and the recorded response times to generate a detailed performance evaluation.
+
+- **Scoring Criteria** (for example):
+  - **Technical Acumen**: Evaluation of the candidate’s technical skills as evidenced in their responses.
+  - **Communication Skills**: Clarity, coherence, and effectiveness in conveying ideas.
+  - **Responsiveness & Agility**: Assess how promptly and thoughtfully the candidate responds. Faster, well-considered responses could be scored higher.
+  - **Problem-Solving & Adaptability**: Ability to handle follow-up questions and provide relevant clarifications.
+  - **Cultural Fit & Soft Skills**: Evaluation of interpersonal communication and potential fit for the company culture.
+
+- **Score Breakdown**:  
+  - Present numerical values or percentages for each category, including a specific metric for response timing.
+  - Provide an overall composite score and a brief summary of the candidate’s strengths and areas for improvement.
+
+- **Prompt Engineering**:  
+  - Clearly document how the AI is instructed to evaluate both the content and the timing of responses.
+
+---
+
+### 5. Technical Requirements
+
+- **Framework & UI**:  
+  - Use Next.js (preferably with the App Router).
+  - While UI libraries (e.g., shadcn/ui) may be utilized, the interactive chat interface should be custom-designed to avoid overly template-driven solutions.
+
+- **AI API Integration**:  
+  - Leverage the provided AI API key for both question generation and final scoring.
+  - Implement robust error handling and asynchronous interactions for API calls.
+
+- **Deployment & Testing**:  
+  - Deploy the application on **Vercel** and provide a live URL.
+  - Include unit tests covering:
+    - Form validation for job description and CV upload.
+    - AI-driven question generation.
+    - The uninterrupted, one-shot chat interface.
+    - Timing data capture and scoring algorithm.
+  - Provide detailed setup instructions and testing documentation.
+
+---
+
+## Submission Guidelines
+
+1. **Repository & Code Organization**
+   - Organize your project with a clear and maintainable directory structure.
+   - Include a detailed README with setup instructions, deployment details, and test running guidelines.
+   - Attach a document describing your prompt design strategy and how both data sources and timing metrics are integrated into the AI evaluation.
+
+2. **Documentation**
+   - Explain your approach to parsing the job description and candidate CV.
+   - Describe how the AI prompts are engineered to combine both inputs for generating context-aware questions.
+   - Detail the scoring criteria, including how timing metrics influence the candidate evaluation.
+
+3. **Deployment**
+   - Ensure the application is deployed on Vercel.
+   - Verify that the full flow is functional: job description/CV input → tailored question generation → uninterrupted dynamic chat interview → AI-powered scoring with timing metrics.
+
+---
+
+## Evaluation Criteria
+
+1. **Functionality & Usability**
+   - Does the application handle dual inputs (job description and CV) and generate relevant interview questions?
+   - Is the chat interface streamlined and intuitive for a one-shot interview session?
+   - Is the timing of candidate responses accurately captured and integrated into the scoring?
+
+2. **AI Integration & Dynamic Flow**
+   - How effectively does the AI API leverage both inputs to generate and adapt interview questions?
+   - Does the one-shot interview process work smoothly without manual intervention?
+   - Is the follow-up questioning appropriately adaptive to candidate responses?
+
+3. **Scoring & Analysis**
+   - Is the candidate’s performance evaluated on multiple dimensions, including response timing?
+   - Is the score breakdown clear, detailed, and reflective of the candidate’s performance?
+   - Are the AI prompts for scoring well-documented and effective?
+
+4. **Code Quality & Documentation**
+   - Is the code modular, clean, and well-documented?
+   - Are unit tests provided for key functionalities?
+   - Is the setup and usage documentation clear and comprehensive?
+
+5. **Deployment & Innovation**
+   - Is the application live on Vercel and fully functional?
+   - Has the candidate introduced innovative touches, particularly regarding the integration of timing metrics into the scoring process?
+
+---
+
+## Final Notes
+
+- **Creativity is Encouraged**: Consider any additional features that enhance the recruitment process, such as nuanced timing-based insights or a refined scoring algorithm.
+- **Clarify Assumptions**: Clearly document any assumptions made during development, particularly regarding the weight of response times in scoring.
+- **Time Management**: The challenge is designed to be completed within 5 days, so prioritize delivering a robust core experience with strong AI integration and clear scoring mechanisms.
+
+Good luck, and we look forward to seeing your innovative approach to an AI-driven, dynamic interview and evaluation system!

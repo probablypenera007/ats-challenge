@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
+
 
 export default function Home() {
+  const router = useRouter();
   const [jobDescription, setJobDescription] = useState("");
   const [cvFile, setCvFile] = useState<File | null>(null);
 
@@ -17,6 +20,7 @@ export default function Home() {
 
     console.log("Job Description:", jobDescription);
     console.log("CV File:", cvFile.name);
+    router.push('/interview');
   };
 
   return (

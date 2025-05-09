@@ -1,20 +1,22 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
+  const [cvFile, setCvFile] = useState<File | null>(null);
 
   const handleSubmit = () => {
     // Validate that job description and CV file exist
     // If not, alert user
     // If valid, log values and navigate to interview page
-    if (!jobDescription) {
-      alert("Please enter a job description.");
+    if (!jobDescription || !cvFile) {
+      alert("Please enter a job description and upload your CV.");
       return;
     }
 
-     console.log('Job Description:', jobDescription);
+    console.log("Job Description:", jobDescription);
+    console.log("CV File:", cvFile.name);
   };
 
   return (
@@ -43,6 +45,17 @@ export default function Home() {
 
       {/* Input field for uploading CV (pdf, docx, txt) */}
       {/* Show selected file name if uploaded */}
+      <div className="w-full max-w-md">
+        <label className="block mb-2 font-medium">Upload Candidate CV</label>
+        <input
+          type="file"
+          accept=".pdf,.docx,.txt"
+          onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+        />
+        {cvFile && (
+          <p className="mt-2 text-sm text-gray-600">Selected: {cvFile.name}</p>
+        )}
+      </div>
 
       {/* Submit button to validate inputs and redirect to /interview */}
       <button

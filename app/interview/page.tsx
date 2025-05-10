@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import ChatBox from "@/components/ChatBox";
 
 interface InterviewSessionData {
@@ -25,6 +26,7 @@ type Message = {
 };
 
 const InterviewPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("id");
 
@@ -183,7 +185,9 @@ const InterviewPage = () => {
 
           {/* Chat */}
           {/* {showChat && <ChatBox messages={messages} onSend={handleSend} />} */}
-          {showChat && !score && <ChatBox messages={messages} onSend={handleSend} />}
+          {showChat && !score && (
+            <ChatBox messages={messages} onSend={handleSend} />
+          )}
 
           {/* Calculating Score */}
           {interviewDone && !score && (
@@ -207,7 +211,7 @@ const InterviewPage = () => {
                 </li>
                 <li>
                   <span className="font-semibold text-gray-800">
-                   Communication:
+                    Communication:
                   </span>
                   <span className="text-purple-900">
                     {score.communication}/10
@@ -223,7 +227,7 @@ const InterviewPage = () => {
                 </li>
                 <li>
                   <span className="font-semibold text-gray-800">
-                   Problem Solving:
+                    Problem Solving:
                   </span>{" "}
                   <span className="text-purple-900">
                     {score.problemSolving}/10
@@ -242,6 +246,12 @@ const InterviewPage = () => {
                 </li>
               </ul>
               <p className="mt-4 italic text-gray-700">📝 {score.summary}</p>
+              <button
+                onClick={() => router.push("/")}
+                className="mt-6 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+              >
+                Restart Interview
+              </button>
             </div>
           )}
         </>

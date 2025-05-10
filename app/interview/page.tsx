@@ -26,8 +26,6 @@ const InterviewPage = () => {
   } = useInterviewSession(sessionId);
 
   return (
-    // <main className="min-h-screen p-6 flex flex-col items-center justify-center text-center">
-    //   <h1 className="text-2xl font-bold mb-4">AI Interview Session</h1>0
     <main className="min-h-screen px-6 py-12 flex flex-col items-center justify-center text-center">
     <div className="mb-6">
       <h1 className="text-4xl font-extrabold text-purple-700">AI Interview Assistant</h1>

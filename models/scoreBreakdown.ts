@@ -7,6 +7,7 @@ const ScoreBreakdownSchema = new Schema({
   problemSolving: Number,
   culturalFit: Number,
   averageScore: Number,
+  avgResponseTime: Number, 
   summary: String,
 }, { _id: false }); 
 

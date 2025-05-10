@@ -5,5 +5,6 @@ export interface ScoreData {
     problemSolving: number;
     culturalFit: number;
     averageScore: number;
+    avgResponseTime: number;
     summary: string;
   }

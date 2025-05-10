@@ -43,6 +43,10 @@ export default function ScoreBreakdown({
         Average Score: {score.averageScore.toFixed(2)}/10
       </div>
 
+      <div className="text-lg font-semibold text-purple-800  border-purple-200 pt--1 mb-2">
+        Avg. Response Time: {score.avgResponseTime} seconds
+      </div>
+
       <p className="mt-2 text-gray-600 leading-relaxed">{score.summary}</p>
 
       <div className="flex justify-center mt-6">

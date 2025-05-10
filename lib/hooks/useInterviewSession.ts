@@ -11,6 +11,7 @@ interface ScoreData {
   problemSolving: number;
   culturalFit: number;
   averageScore: number;
+  avgResponseTime: number; 
   summary: string;
 }
 type Message = { sender: "ai" | "user"; text: string };

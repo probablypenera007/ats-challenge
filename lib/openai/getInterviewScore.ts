@@ -19,6 +19,12 @@ export async function getInterviewScore({ sessionId }: { sessionId: string }) {
     )
     .join("\n\n");
 
+    const avgResponseTime = Math.round(
+      (responses.reduce((acc: number, r: { responseTime?: number }) => acc + (r.responseTime || 0), 0) || 0) /
+        (responses.length || 1)
+    );
+
+
     const prompt = `
     You are an expert AI interview evaluator. Your task is to analyze the following candidate's job interview and provide a brutally honest, professional evaluation.
     
@@ -42,8 +48,12 @@ export async function getInterviewScore({ sessionId }: { sessionId: string }) {
       "problemSolving": number,
       "culturalFit": number,
       "averageScore": number,
+      "avgResponseTime": number,
       "summary": string
     }
+
+The candidate's average response time in seconds: ${avgResponseTime}
+
     
     ---
     

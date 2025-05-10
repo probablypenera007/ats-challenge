@@ -28,7 +28,8 @@ export function useInterviewForm() {
       if (!res.ok) throw new Error(result.error || "Failed to save session");
 
       console.log("✅ Saved session:", result.sessionId);
-      router.push("/interview");
+      // router.push("/interview");
+      router.push(`/interview?id=${result.sessionId}`);
     } catch (error) {
       console.error("❌ Error submitting form:", error);
       alert("Something went wrong while saving.");

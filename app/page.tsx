@@ -6,7 +6,7 @@ import SubmitButton from "@/components/SubmitButton";
 import { useInterviewForm } from "@/lib/hooks/useInterviewForm";
 
 export default function Home() {
-  const { jobDescription, setJobDescription, cvFile, setCvFile, handleSubmit } =
+  const { jobDescription, setJobDescription, cvFile, setCvFile, handleSubmit, isJobDescriptionValid } =
     useInterviewForm();
 
   return (
@@ -33,7 +33,7 @@ export default function Home() {
 
       <SubmitButton
         onClick={handleSubmit}
-        isDisabled={!jobDescription.trim() || !cvFile}
+        isDisabled={!isJobDescriptionValid || !cvFile}
       />
     </main>
   );

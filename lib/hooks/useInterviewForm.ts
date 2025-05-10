@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const minJobDescriptionLength = 100;
+
 export function useInterviewForm() {
   const router = useRouter();
   const [jobDescription, setJobDescription] = useState("");
@@ -36,11 +38,15 @@ export function useInterviewForm() {
     }
   };
 
+  const isJobDescriptionValid = jobDescription.trim().length >= minJobDescriptionLength;
+
+
   return {
     jobDescription,
     setJobDescription,
     cvFile,
     setCvFile,
     handleSubmit,
+    isJobDescriptionValid,
   };
 }

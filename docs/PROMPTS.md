@@ -23,7 +23,6 @@ Candidate CV:
 
 Ask the first question to begin the interview.
 
-
 The AI is instructed to contextualize questions based on the candidate’s background (extracted from the CV) and align them with the job requirements. The first generated question is used to start the interview.
 
 Follow-up prompts include the previous Q&A pair to continue context-aware questioning.

@@ -8,7 +8,6 @@ interface ChatBoxProps {
 }
 
 const ChatBox: React.FC<ChatBoxProps> = ({ messages, onSend }) => {
-  const [input, setInput] = React.useState("");
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement | null>(null);
 

@@ -7,42 +7,52 @@ interface ScoreBreakdownProps {
   onRestart: () => void;
 }
 
-export default function ScoreBreakdown({ score, onRestart }: ScoreBreakdownProps) {
+export default function ScoreBreakdown({
+  score,
+  onRestart,
+}: ScoreBreakdownProps) {
+  const categories = [
+    { label: "Technical", value: score.technical },
+    { label: "Communication", value: score.communication },
+    { label: "Responsiveness", value: score.responsiveness },
+    { label: "Problem Solving", value: score.problemSolving },
+    { label: "Cultural Fit", value: score.culturalFit },
+  ];
+
   return (
-    <div className="w-full max-w-xl mt-8 bg-white border rounded-lg p-6 text-left shadow">
-      <h2 className="text-xl font-bold mb-4 text-purple-700">Interview Score Breakdown</h2>
-      <ul className="space-y-2">
-        <li>
-          <span className="font-semibold text-gray-800">Technical:</span>
-          <span className="text-purple-900"> {score.technical}/10</span>
-        </li>
-        <li>
-          <span className="font-semibold text-gray-800">Communication:</span>
-          <span className="text-purple-900"> {score.communication}/10</span>
-        </li>
-        <li>
-          <span className="font-semibold text-gray-800">Responsiveness:</span>
-          <span className="text-purple-900"> {score.responsiveness}/10</span>
-        </li>
-        <li>
-          <span className="font-semibold text-gray-800">Problem Solving:</span>
-          <span className="text-purple-900"> {score.problemSolving}/10</span>
-        </li>
-        <li>
-          <span className="font-semibold text-gray-800">Cultural Fit:</span>
-          <span className="text-purple-900"> {score.culturalFit}/10</span>
-        </li>
-        <li className="font-bold text-purple-700 border-t pt-2 mt-2">
-          Average Score: {score.averageScore.toFixed(2)}/10
-        </li>
-      </ul>
-      <p className="mt-4 italic text-gray-700">📝 {score.summary}</p>
-      <button
-        onClick={onRestart}
-        className="mt-6 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
-      >
-        Restart Interview
-      </button>
+    <div className="w-full max-w-2xl bg-white border border-purple-200 rounded-2xl p-8 shadow-lg text-left">
+      <h2 className="text-2xl font-bold text-purple-700 mb-6">
+        Interview Score Breakdown
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+        {categories.map((cat, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between bg-gray-50 border border-purple-100 rounded-lg px-4 py-3"
+          >
+            <span className="text-gray-800 font-medium">{cat.label}</span>
+            <span className="text-purple-700 font-semibold">
+              {cat.value}/10
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-lg font-semibold text-purple-800 border-t border-purple-200 pt-4 mb-2">
+        Average Score: {score.averageScore.toFixed(2)}/10
+      </div>
+
+      <p className="mt-2 text-gray-600 leading-relaxed">{score.summary}</p>
+
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={onRestart}
+          className="px-6 py-2 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition"
+        >
+          Restart Interview
+        </button>
+      </div>
     </div>
   );
 }

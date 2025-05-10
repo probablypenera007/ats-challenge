@@ -33,6 +33,7 @@ export default function CVUploader({ cvFile, setCvFile }: Props) {
 
       <input
         id="cv-upload-input"
+        data-testid="cv-upload-input"
         type="file"
         accept=".pdf,.docx,.txt,.text"
         onChange={(e) => setCvFile(e.target.files?.[0] || null)}

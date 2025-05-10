@@ -19,7 +19,7 @@ describe('ChatBox Component', () => {
     const mockSend = jest.fn();
     render(<ChatBox messages={mockMessages} onSend={mockSend} />);
 
-    const input = screen.getByPlaceholderText(/type your answer/i);
+    const input = screen.getByPlaceholderText(/type your response/i);
     const button = screen.getByRole('button', { name: /send/i });
 
     fireEvent.change(input, { target: { value: 'My test answer' } });
@@ -32,7 +32,7 @@ describe('ChatBox Component', () => {
     const mockSend = jest.fn();
     render(<ChatBox messages={mockMessages} onSend={mockSend} />);
 
-    const input = screen.getByPlaceholderText(/type your answer/i);
+    const input = screen.getByPlaceholderText(/type your response/i);
     const button = screen.getByRole('button', { name: /send/i });
 
     fireEvent.change(input, { target: { value: 'Testing reset' } });

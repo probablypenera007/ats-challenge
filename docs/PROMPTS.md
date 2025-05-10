@@ -1,10 +1,10 @@
-Prompt Design Strategy
+# Prompt Design Strategy
 
-Overview
+## Overview
 
 The AI prompts in this project are crafted to guide the model in generating highly relevant and role-specific interview questions, and later to evaluate candidate performance based on both answer content and response timing.
 
-1. Question Generation Prompt
+### 1. Question Generation Prompt
 
 When generating interview questions, the prompt combines:
 
@@ -12,7 +12,7 @@ The full Job Description provided by the recruiter
 
 The parsed CV content of the candidate
 
-Example Prompt Structure:
+### Example Prompt Structure:
 You are an expert technical recruiter. Using the job description and the candidate’s CV below, generate a tailored interview question.
 
 Job Description:
@@ -29,7 +29,7 @@ The AI is instructed to contextualize questions based on the candidate’s backg
 Follow-up prompts include the previous Q&A pair to continue context-aware questioning.
 
 
-2. Follow-up Question Prompt
+### 2. Follow-up Question Prompt
 
 After every user response:
 You are conducting an interview. Based on the following Q&A, ask a logical follow-up question.
@@ -44,7 +44,7 @@ This maintains conversation flow and dynamically adapts based on user input.
 
 
 
-3. Scoring Prompt
+### 3. Scoring Prompt
 
 After the interview ends, a transcript is compiled with timing metrics and passed to the AI with the job description and CV.
 

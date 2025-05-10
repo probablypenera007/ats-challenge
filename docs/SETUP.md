@@ -48,3 +48,8 @@ npm run build
 API Errors: Check if your OpenAI key or MongoDB URI is missing.
 Build Errors: Confirm Node.js version and dependencies are installed correctly.
 404 or Crashes: Check console logs and backend routes.
+
+8. Running Tests
+This project uses Jest and React Testing Library for unit tests
+to run tests:
+npm run test

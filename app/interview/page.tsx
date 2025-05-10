@@ -244,20 +244,6 @@ const InterviewPage = () => {
               <p className="mt-4 italic text-gray-700">📝 {score.summary}</p>
             </div>
           )}
-
-          {/* Static Previews */}
-          {/* <div className="space-y-4 text-left w-full max-w-2xl mt-8">
-            <p>
-              <strong>📝 Job Description Preview:</strong>
-              <br />
-              {sessionData.jobDescription.slice(0, 200)}...
-            </p>
-            <p>
-              <strong>📄 CV Preview:</strong>
-              <br />
-              {sessionData.cvText.slice(0, 200)}...
-            </p>
-          </div> */}
         </>
       )}
     </main>

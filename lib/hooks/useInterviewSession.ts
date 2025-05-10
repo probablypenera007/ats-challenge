@@ -61,7 +61,6 @@ export const useInterviewSession = (sessionId: string | null) => {
   const handleSend = async (userMsg: string) => {
     if (!sessionId || !currentQuestion || startTime === null) return;
     const responseTime = Date.now() - startTime;
-    // const newMessages = [...messages, { sender: "user", text: userMsg }];
     const newMessages = [...messages, { sender: "user" as const, text: userMsg }];
     setMessages(newMessages);
 

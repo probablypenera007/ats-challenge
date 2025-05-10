@@ -1,23 +1,83 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Readable, Writable } from "stream";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const createBusboy = require("busboy");
+import { extractTextFromBuffer } from "@/lib/parsers/fileParser";
 import { connectToDB } from "@/lib/mongodb/connect";
 import InterviewSession from "@/models/interviewSession";
 
-export async function POST(req: NextRequest) {
-  try {
-    const form = await req.formData();
-    const jobDescription = form.get("jobDescription")?.toString() || "";
-    const file = form.get("cvFile") as File;
+export const config = {
+  api: { bodyParser: false },
+};
 
-    // Optional: read file text content (example for .txt files)
-    const buffer = file ? Buffer.from(await file.arrayBuffer()) : null;
-    const cvText = buffer?.toString("utf-8") || "";
+function bufferFromStream(stream: Readable): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    stream.on("data", (chunk) => chunks.push(chunk));
+    stream.on("end", () => resolve(Buffer.concat(chunks)));
+    stream.on("error", reject);
+  });
+}
 
-    await connectToDB();
-    const saved = await InterviewSession.create({ jobDescription, cvText });
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const reqBuffer = Buffer.from(await req.arrayBuffer());
+  const reqStream = Readable.from(reqBuffer);
 
-    return NextResponse.json({ success: true, sessionId: saved._id });
-  } catch (err) {
-    console.error("❌ Failed to save session:", err instanceof Error ? err.stack : err);
-    return NextResponse.json({ success: false, error: "Internal error" }, { status: 500 });
-  }
+  return new Promise((resolve) => {
+    const busboy = createBusboy({
+      headers: Object.fromEntries(req.headers.entries()),
+    });
+
+    let jobDescription = "";
+    let extractedText = "";
+    let fileHandled = false;
+    let fileParsePromise: Promise<void> | null = null;
+
+    busboy.on("field", (name: string, value: string) => {
+      if (name === "jobDescription") jobDescription = value;
+    });
+
+    busboy.on(
+      "file",
+      (_fieldname: string, file: Readable, info: { filename: string; encoding: string; mimeType: string }) => {
+        fileHandled = true;
+
+        fileParsePromise = (async () => {
+          try {
+            const buffer = await bufferFromStream(file);
+            extractedText = await extractTextFromBuffer(buffer, info.mimeType);
+            console.log("📄 Extracted text preview:", extractedText.slice(0, 200));
+          } catch (error) {
+            console.error("❌ File parsing error:", error);
+          }
+        })();
+      }
+    );
+
+    busboy.on("finish", async () => {
+      if (!fileHandled) {
+        return resolve(
+          NextResponse.json({ success: false, error: "No file uploaded" }, { status: 400 })
+        );
+      }
+
+      if (fileParsePromise) await fileParsePromise;
+
+      try {
+        await connectToDB();
+        const saved = await InterviewSession.create({
+          jobDescription,
+          cvText: extractedText,
+        });
+        return resolve(NextResponse.json({ success: true, sessionId: saved._id }));
+      } catch (error) {
+        console.error("❌ DB Error:", error);
+        return resolve(
+          NextResponse.json({ success: false, error: "Database error" }, { status: 500 })
+        );
+      }
+    });
+
+    reqStream.pipe(busboy as unknown as Writable);
+  });
 }

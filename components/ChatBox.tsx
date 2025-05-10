@@ -17,7 +17,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ messages, onSend }) => {
     setInput("");
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -54,18 +54,18 @@ const ChatBox: React.FC<ChatBoxProps> = ({ messages, onSend }) => {
         <div ref={bottomRef} />
       </div>
 
-      <div className="flex gap-4">
-        <input
-          type="text"
+      <div className="flex items-end gap-4">
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
+          rows={2}
           placeholder="Type your response..."
-          className="flex-1 px-5 py-4 rounded-2xl border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none text-xl text-gray-800"
-        />
+          className="w-full resize-none px-5 py-4 rounded-2xl border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none text-xl text-gray-800"
+          />
         <button
           onClick={handleSend}
-          className="px-6 py-4 bg-purple-600 text-white text-xl font-semibold rounded-2xl hover:bg-purple-700 transition"
+          className="px-8 py-7 bg-purple-600 text-white text-xl font-semibold rounded-2xl hover:bg-purple-700 transition"
         >
           Send
         </button>

@@ -1,16 +1,6 @@
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
-
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window.HTMLElement.prototype, 'scrollIntoView', {
   writable: true,
-  value: (query: string) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), 
-    removeListener: jest.fn(), 
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  }),
+  value: jest.fn(),
 });

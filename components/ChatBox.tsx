@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ChatBoxProps {
   messages: { sender: "ai" | "user"; text: string }[];
@@ -9,12 +9,24 @@ interface ChatBoxProps {
 
 const ChatBox: React.FC<ChatBoxProps> = ({ messages, onSend }) => {
   const [input, setInput] = React.useState("");
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const handleSend = () => {
     if (!input.trim()) return;
     onSend(input);
     setInput("");
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div className="w-full max-w-2xl p-4 border rounded shadow bg-white">
@@ -29,6 +41,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ messages, onSend }) => {
             {msg.text}
           </div>
         ))}
+        <div ref={bottomRef} />
       </div>
       <div className="flex gap-2">
         <input
@@ -36,6 +49,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ messages, onSend }) => {
           className="flex-1 border px-3 py-2 rounded text-black"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Type your response..."
         />
         <button

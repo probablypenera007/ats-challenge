@@ -5,7 +5,6 @@ import ScoreBreakdownSchema from "./scoreBreakdown";
 const InterviewSessionSchema = new Schema({
   jobDescription: String,
   cvText: String,
-  questions: [String],
   responses: [ResponseSchema],
   score: ScoreBreakdownSchema,
   startedAt: Date,

@@ -5,7 +5,7 @@ import type { Buffer } from "buffer";
 export async function extractTextFromBuffer(buffer: Buffer, mimeType: string): Promise<string> {
     if (mimeType === "application/pdf") {
         try {
-          const result = await pdfParse(buffer); // ✅ Do NOT import test file!
+          const result = await pdfParse(buffer); 
           return result.text.trim();
         } catch (err) {
           console.error("❌ PDF parsing failed:", err);
@@ -16,7 +16,7 @@ export async function extractTextFromBuffer(buffer: Buffer, mimeType: string): P
   if (mimeType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
     const result = await mammoth.extractRawText({ buffer });
   
-    console.log("📄 Extracted DOCX text:", result.value); // <-- Add this
+    console.log("📄 Extracted DOCX text:", result.value); 
   
     return result.value;
   }

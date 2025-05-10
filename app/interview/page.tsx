@@ -28,7 +28,7 @@ const InterviewPage = () => {
   return (
     <main className="min-h-screen px-6 py-12 flex flex-col items-center justify-center text-center">
     <div className="mb-6">
-      <h1 className="text-4xl font-extrabold text-purple-700">AI Interview Assistant</h1>
+      <h1 className="text-5xl font-extrabold text-purple-700">AI Interview Assistant</h1>
       <p className="text-lg text-gray-50 mt-2 max-w-xl">
         Your personalized mock interview powered by AI — tailored to your job application and CV.
       </p>

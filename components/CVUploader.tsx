@@ -14,9 +14,6 @@ export default function CVUploader({ cvFile, setCvFile }: Props) {
 
   return (
     <div className="w-full max-w-md text-left">
-      {/* <label className="block mb-3 text-sm font-semibold text-gray-700">
-      </label> */}
-
       <div
         onClick={handleClick}
         className={`flex flex-col items-center justify-center gap-1 w-full h-40 border-4 border-dashed rounded-xl cursor-pointer transition ${

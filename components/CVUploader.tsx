@@ -19,7 +19,7 @@ export default function CVUploader({ cvFile, setCvFile }: Props) {
 
       <div
         onClick={handleClick}
-        className={`flex flex-col items-center justify-center gap-1 w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition ${
+        className={`flex flex-col items-center justify-center gap-1 w-full h-40 border-4 border-dashed rounded-xl cursor-pointer transition ${
           cvFile
             ? "bg-purple-200 border-purple-500 text-purple-800"
             : "bg-purple-50 border-purple-400 text-purple-700 hover:bg-purple-100"
